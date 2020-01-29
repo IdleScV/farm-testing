@@ -1,9 +1,19 @@
-class Animals
-    attr_reader :name, :type, :status, :hunger
+#? Animals start with 5 hunger
+#? Everyday they lose 1 hunger
+#? Feeding provides 1 hunger
+#? Animals with hunger of 0 get killed
+#? retrieve product kills chickens & make cows hungry. 
+#? Cows give milk +1 chickens
+#? Creates array of all alive animals
+#
 
+
+class Animals
+    attr_reader :name, :type, :hunger
+    attr_accessor :status
     @@all = []
     @@allalive = []
-    @@allproducts = {drumsticks => 0, milk => 0}
+    @@allproducts = {:drumsticks => 0, :milk => 0}
 
     def initialize(name, type)
         @type = type
@@ -35,31 +45,50 @@ class Animals
     end
 
     def self.feed
-        
         @@allalive.map{|x| x.hunger=(x.hunger + 1)}
     end
 
+    #! This method adds food into @@allproducts, kills chickens
     def retrieveproduct
-        if self.type == 'chicken'
-            @@product 
+        #! not working
+        if self.type == 'chicken' && self.status == 'alive'
+            @@allproducts[:drumsticks] += 2
+            self.status = "became food"
+            @@allalive.delete(self)
+
+            #! Cow works
+        elsif self.type == 'cow' && self.status == "alive"
+            @@allproducts[:milk] += 1
+            self.hunger -= 2
+        end
+
     end
 
+    def self.allproducts
+        @@allproducts
+    end
+
+    def self.allalive
+        @@allalive
+    end
 end
 
-chicken1 = Animals.new('fred', 'chicken')
-chicken2 = Animals.new('creed', 'chicken')
-cow1 = Animals.new('cowy', 'cow')
-cow2 = Animals.new('cowwie', 'cow')
+# chicken1 = Animals.new('fred', 'chicken')
 
-Animals.fullday
-Animals.fullday
-Animals.fullday
-cow1.hunger=(5)
-Animals.fullday
-Animals.fullday
-Animals.feed
+# cow1 = Animals.new('cowy', 'cow')
 
+# chicken1.retrieveproduct
+# chicken1.retrieveproduct
 
+# cow1.retrieveproduct
+# cow1.retrieveproduct
+# cow1.retrieveproduct
+# cow1.retrieveproduct
+# cow1.retrieveproduct
 
 
-p Animals.all_animals
+
+
+# p Animals.all_animals.map{|animal| animal.name}
+# p Animals.allproducts
+# p Animals.allalive{|animal| animal.name}
