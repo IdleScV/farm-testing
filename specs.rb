@@ -21,6 +21,11 @@
 
 #* #eat(foodamount) increase a person's hunger by the amount of food
 
+#! Farm class
+#* (Done).all returns all farms
+#* (Done)Farm.new requires the name of a string and an owner. Sets day to 0.
+
+
 
 
 

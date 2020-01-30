@@ -4,7 +4,7 @@ class People
     #! Below is presets
 
     attr_accessor :job
-    attr_reader :name
+    attr_reader :name, :farm
 
     @@all = []
     @@jobs = {:owner => [], :farmhands => [], :farmers => [], :cooks =>[], :nojob => []}
@@ -30,10 +30,11 @@ class People
         end
     end
     
-    def initialize(name, job='nojob')
-        @name = name
+    def initialize(person_name_string, job='nojob', farm_instance='no farm')
+        @name = person_name_string
         @job = job
         @hunger = 5
+        @farm = farm_instance 
         @@all << self
         sortjob(@job)
     end
@@ -41,11 +42,11 @@ class People
     #! Above is all for adding new people
     #//                                     
     #! Below is all for multiple persons
-
+    #? Returns all people
     def self.all
         @@all
     end
-
+    #? Returns people, seperated by jobs
     def self.jobs(type='all')
         case type
             when 'all'
@@ -103,15 +104,15 @@ class People
 end
 
 #! List of test people
-owner = People.new('Alessio Curran', 'owner')
-cook1 = People.new('Ricardo Salgado', 'cooks')
-cook2 = People.new('Lois Nixon', 'cooks')
-farmhand1 = People.new('Anaya Mcmanus', 'farmhands')
-farmhand2 = People.new('Rohit Barrera', 'farmhands')
-farmhand3 = People.new('Eesha Greenaway', 'farmhands')
-farmer1 = People.new('Jena Humphreys', 'farmers')
-farmer2 = People.new('Demi-Lee Rollins', 'farmers')
-nojob1 = People.new('Nathan Lewis')
+# owner = People.new('Alessio Curran', 'owner')
+# cook1 = People.new('Ricardo Salgado', 'cooks')
+# cook2 = People.new('Lois Nixon', 'cooks')
+# farmhand1 = People.new('Anaya Mcmanus', 'farmhands')
+# farmhand2 = People.new('Rohit Barrera', 'farmhands')
+# farmhand3 = People.new('Eesha Greenaway', 'farmhands')
+# farmer1 = People.new('Jena Humphreys', 'farmers')
+# farmer2 = People.new('Demi-Lee Rollins', 'farmers')
+# nojob1 = People.new('Nathan Lewis')
 
 
 #! test functioning
@@ -127,19 +128,19 @@ nojob1 = People.new('Nathan Lewis')
 # p owner.person_info
 
 #? Hunger + work test
-p cook1.hunger
-p cook1.work
-p cook1.hunger
-p cook1.work
-p cook1.hunger
-p cook1.work
-p cook1.hunger
-p cook1.work
-p cook1.hunger
-p cook1.work
-p cook1.hunger
-p cook1.work
-p cook1.hunger
+# p cook1.hunger
+# p cook1.work
+# p cook1.hunger
+# p cook1.work
+# p cook1.hunger
+# p cook1.work
+# p cook1.hunger
+# p cook1.work
+# p cook1.hunger
+# p cook1.work
+# p cook1.hunger
+# p cook1.work
+# p cook1.hunger
 
 
 #? in Farm, make a method of newPerson(name, job title) that calls People.new(job ,title)
