@@ -7,7 +7,7 @@ class People
     attr_reader :name, :farm
 
     @@all = []
-    @@jobs = {:owner => [], :farmhands => [], :farmers => [], :cooks =>[], :nojob => []}
+    @@jobs = {:owner => [], :farmhands => [], :farmer => [], :cook =>[], :unemployeed => []}
 
     #! Above is presets
     #//                                     
@@ -17,20 +17,20 @@ class People
         # binding.pry
         case jobtype
             # binding.pry
-            when 'cooks'
-                then @@jobs[:cooks].push self
+            when 'cook'
+                then @@jobs[:cook].push self
             when 'farmhands'
                 then @@jobs[:farmhands].push self
-            when 'farmers'
-                then @@jobs[:farmers].push self
+            when 'farmer'
+                then @@jobs[:farmer].push self
             when 'owner'
                 then @@jobs[:owner].push self
-            when 'nojob'
-                then @@jobs[:nojob].push self
+            when 'unemployeed'
+                then @@jobs[:unemployeed].push self
         end
     end
     
-    def initialize(person_name_string, job='nojob', farm_instance='no farm')
+    def initialize(person_name_string, job='unemployeed', farm_instance='no farm')
         @name = person_name_string
         @job = job
         @hunger = 5
@@ -49,18 +49,23 @@ class People
     #? Returns people, seperated by jobs
     def self.jobs(type='all')
         case type
+        
             when 'all'
-                @@jobs.map{|k, v| v.map{|person| "#{person.job}: #{person.name} at #{person.hunger} hunger level."}}
-            when 'cooks'
-                @@jobs[:cooks].map{|person| "#{person.name} at #{person.hunger} hunger level."}
-            when 'farmhands'
-                @@jobs[:farmhands].map{|person| "#{person.name} at #{person.hunger} hunger level."}
-            when 'farmers'
-                @@jobs[:farmhands].map{|person| "#{person.name} at #{person.hunger} hunger level."}
-            when 'owner'
-                @@jobs[:owner].map{|person| "#{person.name} at #{person.hunger} hunger level."}
-            when 'unemployeed'
-                @@jobs[:nojob].map{|person| "#{person.name} at #{person.hunger} hunger level."}
+            
+                @@jobs.map{|k, v| 
+                    puts (v[0].job) + ": "
+                    p v.map{|people| people.name}
+                }
+            # when 'cook'
+            #     @@jobs[:cook].map{|person| "#{person.name} at #{person.hunger}."}
+            # when 'farmhands'
+            #     @@jobs[:farmhands].map{|person| "#{person.name} at #{person.hunger}."}
+            # when 'farmer'
+            #     @@jobs[:farmhands].map{|person| "#{person.name} at #{person.hunger}."}
+            # when 'owner'
+            #     @@jobs[:owner].map{|person| person.name}
+            # when 'unemployeed'
+            #     @@jobs[:unemployeed].map{|person| person.name}
             end
     end
 
@@ -103,24 +108,24 @@ class People
 
 end
 
-#! List of test people
-# owner = People.new('Alessio Curran', 'owner')
-# cook1 = People.new('Ricardo Salgado', 'cooks')
-# cook2 = People.new('Lois Nixon', 'cooks')
-# farmhand1 = People.new('Anaya Mcmanus', 'farmhands')
-# farmhand2 = People.new('Rohit Barrera', 'farmhands')
-# farmhand3 = People.new('Eesha Greenaway', 'farmhands')
-# farmer1 = People.new('Jena Humphreys', 'farmers')
-# farmer2 = People.new('Demi-Lee Rollins', 'farmers')
-# nojob1 = People.new('Nathan Lewis')
+# ! List of test people
+owner = People.new('Alessio Curran', 'owner')
+cook1 = People.new('Ricardo Salgado', 'cook')
+cook2 = People.new('Lois Nixon', 'cook')
+farmhand1 = People.new('Anaya Mcmanus', 'farmhands')
+farmhand2 = People.new('Rohit Barrera', 'farmhands')
+farmhand3 = People.new('Eesha Greenaway', 'farmhands')
+farmer1 = People.new('Jena Humphreys', 'farmer')
+farmer2 = People.new('Demi-Lee Rollins', 'farmer')
+unemployeed1 = People.new('Nathan Lewis')
 
 
 #! test functioning
 #? multiple people info test
 # puts People.all
-# puts People.jobs
-# p People.jobs('owner')
-# p People.jobs('cooks')
+People.jobs
+# puts People.jobs('owner')
+# p People.jobs('cook')
 # p People.jobs('farmhands')
 
 #? singular info test
